@@ -73,3 +73,7 @@ export interface IBaseSection<T> {
 	description: string;
 	viewAllButton: IButton;
 }
+
+export interface IPageProps {
+	params: { slug: string[] };
+}
