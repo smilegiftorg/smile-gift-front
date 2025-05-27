@@ -16,6 +16,7 @@ import {
 } from "react-icons/fa";
 import Button from "@/components/ui/Button";
 import { Metadata } from "next";
+import Description from "@/components/ui/Description";
 
 // Sample news data array
 const allNews = [
@@ -178,7 +179,7 @@ export default function NewsDetailPage({ params }: { params: { id: string } }) {
 
 								<div className="p-8">
 									<article className="prose prose-lg max-w-none">
-										<div dangerouslySetInnerHTML={{ __html: news.content }} />
+										<Description description={news.content || ""} classes="" />
 									</article>
 
 									{/* Share */}

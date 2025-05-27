@@ -79,21 +79,6 @@ function Header(props: IHeaderSection) {
 											</option>
 										))}
 								</select>
-								<select
-									value={status || ""}
-									onChange={(evt) => {
-										if (!evt?.target.value) {
-											removeStatus();
-										} else {
-											setStatus(evt?.target.value || "");
-										}
-									}}
-									className="py-3 px-4 bg-white/10 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50 appearance-none cursor-pointer"
-								>
-									<option value="">Trạng thái</option>
-									<option value="upcoming">Sắp diễn ra</option>
-									<option value="completed">Đã hoàn thành</option>
-								</select>
 							</div>
 						</div>
 					</div>

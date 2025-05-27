@@ -29,7 +29,6 @@ export default async function Home() {
 		<>
 			<SectionManager sections={sections} />
 			<div className="bg-primary-50 py-20">
-				{/* <div className="absolute inset-0 opacity-10 bg-pattern-leaves"></div> */}
 				<div className="container-custom">
 					<div className="grid md:grid-cols-2 gap-10">
 						<VolunteerCTA {...volunteerCTASection} />

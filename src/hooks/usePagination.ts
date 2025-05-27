@@ -12,7 +12,7 @@ export function usePagination() {
 	const pageValue = useMemo(() => {
 		const values = searchParams.getAll("page") || [];
 		const value = Array.isArray(values) ? values[0] : values;
-		return value;
+		return value || "1";
 	}, [searchParams]);
 
 	const setPage = useCallback(
