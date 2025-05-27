@@ -1,3 +1,4 @@
+import { IArticle } from "./IArticle";
 import { IBaseSection, IButton, ICategory, IImageData, ISeo } from "./ICommon";
 import { IProgram } from "./IProgram";
 
@@ -134,22 +135,6 @@ interface IArticles {
 	data: IArticle[];
 }
 
-export interface IArticle {
-	id: number;
-	attributes: {
-		title: string;
-		slug: string;
-		publishedAt: string;
-		image: {
-			data: IImageData;
-		};
-		category: {
-			data: ICategory;
-		};
-		description: string;
-		author: string;
-	};
-}
 interface IBenefit {
 	text: string;
 }

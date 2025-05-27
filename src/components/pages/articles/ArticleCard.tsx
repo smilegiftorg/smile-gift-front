@@ -1,6 +1,6 @@
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
-import { IArticle } from "@/types/IHomePage";
+import { IArticle } from "@/types/IArticle";
 import { formatShortDate } from "@/utils/dateTimeHelper";
 import { getStrapiMedia } from "@/utils/helpers";
 import Image from "next/image";
