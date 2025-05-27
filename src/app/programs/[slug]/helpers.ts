@@ -216,7 +216,7 @@ export const allPrograms = [
 		image: "https://images.pexels.com/photos/3321793/pexels-photo-3321793.jpeg",
 		description:
 			'Đêm nhạc gây quỹ với chủ đề "ĐÊM", quyên góp được 50 triệu đồng cho quỹ học bổng sinh viên.',
-		category: "Gây quỹ",
+		category: "Tặng quà",
 		status: "completed",
 		longDescription: `
       Đêm nhạc gây quỹ với chủ đề "ĐÊM" là sự kiện văn hóa nghệ thuật được tổ chức nhằm quyên góp tiền cho quỹ học bổng sinh viên nghèo vượt khó. Chương trình đã diễn ra thành công tốt đẹp tại Nhà văn hóa Thanh Niên với sự tham gia của nhiều nghệ sĩ nổi tiếng.
@@ -287,6 +287,7 @@ export function getRelatedPrograms(
 	limit: number = 3
 ) {
 	const currentProgram = allPrograms.find((p) => p.id === currentProgramId);
+	console.log("currentProgram: ", currentProgram);
 
 	if (!currentProgram) return [];
 

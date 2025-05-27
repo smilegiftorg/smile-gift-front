@@ -1,10 +1,11 @@
 import { getCategoriesQueryOptions } from "@/apis/category/getCategories.api";
-import { fetchPrograms } from "@/apis/program/getPrograms.api";
+import { getPage } from "@/apis/page/getPage.api";
+import { getProgramsQueryOptions } from "@/apis/program/getPrograms.api";
 import AllPrograms from "@/components/pages/programs/AllPrograms";
 import Header from "@/components/pages/programs/Header";
 import SectionManager from "@/components/sections/SectionManager";
 import { fetchAPI } from "@/utils/api";
-import { getStrapiMedia } from "@/utils/helpers";
+import { transformToMeta } from "@/utils/meta";
 import {
 	dehydrate,
 	HydrationBoundary,
@@ -40,80 +41,26 @@ export async function generateMetadata() {
 				"Kết nối nghệ thuật và lòng nhân ái - Nơi tập hợp những bạn trẻ yêu thích nghệ thuật và mong muốn dùng tài năng để trao đi yêu thương.",
 		};
 	}
-	return {
-		title: seo.metaTitle,
-		description: seo.metaDescription,
-		keywords: seo.keywords,
-		robots: seo.metaRobots,
-		alternates: {
-			canonical: seo.canonicalURL,
-		},
-		openGraph: {
-			title: seo.metaTitle,
-			description: seo.metaDescription,
-			siteName: "CLB Thiện Nguyện Smile Gift",
-			images: getStrapiMedia(seo?.metaImage?.data?.attributes?.url)
-				? [
-						{
-							url: getStrapiMedia(seo?.metaImage?.data?.attributes?.url),
-							alt:
-								seo?.metaImage?.data?.attributes?.alternativeText ||
-								seo.metaTitle,
-							width: 1200,
-							height: 630,
-						},
-				  ]
-				: [],
-			locale: "vi_VN",
-			type: "website",
-		},
-		twitter: seo.metaSocial?.some((m: any) => m.socialNetwork === "Twitter")
-			? {
-					card: "summary_large_image",
-					title: seo.metaTitle,
-					description: seo.metaDescription,
-					images: seo.metaImage?.data?.attributes?.url
-						? [getStrapiMedia(seo.metaImage.data.attributes.url)]
-						: [],
-			  }
-			: undefined,
-		other: {
-			"structured-data": JSON.stringify(seo.structuredData || {}),
-		},
-	};
+	const meta = transformToMeta(seo);
+	return meta;
 }
 
-export default async function ProgramsPage(props: any) {
-	const data = await fetchAPI(
-		"api/pages",
-		{
-			filters: {
-				slug: {
-					$eq: "programs",
-				},
-			},
-			populate: {
-				sessions: {
-					populate: {
-						backgroundImage: true,
-						highlightBox: true,
-						mainImage: true,
-						quoteBox: true,
-						missionItems: true,
-						coreValues: true,
-						buttons: true,
-						members: {
-							populate: ["image"],
-						},
-					},
-				},
+export default async function ProgramsPage() {
+	const page = await getPage("programs", {
+		populate: {
+			backgroundImage: true,
+			highlightBox: true,
+			mainImage: true,
+			quoteBox: true,
+			missionItems: true,
+			coreValues: true,
+			buttons: true,
+			members: {
+				populate: ["image"],
 			},
 		},
-		{
-			next: { revalidate: 60 },
-		}
-	);
-	const sections = data?.data?.[0]?.attributes?.sessions || [];
+	});
+	const sections = page?.data?.[0]?.attributes?.sessions || [];
 
 	const header = sections.find(
 		(item: any) => item.__component === "sections.header"
@@ -121,12 +68,9 @@ export default async function ProgramsPage(props: any) {
 
 	const queryClient = new QueryClient();
 
-	await queryClient.prefetchQuery({
-		queryKey: ["programs", {}],
-		queryFn: () => fetchPrograms({}),
-	});
+	await queryClient.prefetchQuery(getProgramsQueryOptions({ page: 1 }));
 
-	await queryClient.prefetchQuery(getCategoriesQueryOptions({ populate: "*" }));
+	await queryClient.prefetchQuery(getCategoriesQueryOptions());
 	const dehydratedState = dehydrate(queryClient);
 
 	return (
