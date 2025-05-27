@@ -33,7 +33,9 @@ export async function generateMetadata() {
 	);
 
 	const res = await fetch(
-		getStrapiURL("/homepage?populate[sections][populate]=metaSocial,metaImage"),
+		getStrapiURL(
+			"api/homepage?populate[sections][populate]=metaSocial,metaImage"
+		),
 		{
 			next: { revalidate: 60 },
 		}
@@ -106,7 +108,7 @@ export default async function RootLayout({
 }) {
 	const res = await fetch(
 		getStrapiURL(
-			`/global?populate[header][populate]=*&populate[footer][populate]=*`
+			`api/global?populate[header][populate]=*&populate[footer][populate]=*`
 		),
 		{
 			next: { revalidate: 60 },

@@ -69,3 +69,8 @@ interface ITeamMember {
 		data: IImageData;
 	};
 }
+
+export interface IJoinUsCtaSection
+	extends IBaseSection<"sections.join-us-cta"> {
+	buttons: IButton[];
+}

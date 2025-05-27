@@ -6,7 +6,15 @@ import qs from "qs";
  * @returns {string} Full Strapi URL
  */
 export function getStrapiURL(path = "") {
-	return `${process.env.STRAPI_API_URL || "http://localhost:1337"}${path}`;
+	let fullUrl = `${
+		process.env.STRAPI_API_URL || "http://localhost:1337"
+	}/${path}`;
+	if (typeof window === undefined) {
+		fullUrl = `${
+			process.env.STRAPI_API_URL || "http://localhost:1337"
+		}/${path}`;
+	}
+	return fullUrl;
 }
 
 /**
@@ -30,13 +38,17 @@ export async function fetchAPI(
 	};
 
 	// Build request URL
-	const queryString = qs.stringify(urlParamsObject);
+	const queryString = qs.stringify(urlParamsObject, {
+		encodeValuesOnly: true,
+		arrayFormat: "brackets",
+	});
 	const requestUrl = `${getStrapiURL(
 		`${path}${queryString ? `?${queryString}` : ""}`
 	)}`;
 
 	// Trigger API call
 	const response = await fetch(requestUrl, mergedOptions);
+	console.log("requestUrl: ", requestUrl);
 
 	// Handle response
 	if (!response.ok) {

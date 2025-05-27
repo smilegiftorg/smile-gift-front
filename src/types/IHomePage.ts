@@ -1,4 +1,6 @@
-import { IBaseSection, IButton, ICategory, IImageData } from "./ICommon";
+import { IArticle } from "./IArticle";
+import { IBaseSection, IButton, ICategory, IImageData, ISeo } from "./ICommon";
+import { IProgram } from "./IProgram";
 
 export interface IPageData {
 	data: {
@@ -78,27 +80,6 @@ export interface IPrograms {
 	data: IProgram[];
 }
 
-export interface IProgram {
-	id: number;
-	attributes: {
-		title: string;
-		status: string;
-		createdAt: string;
-		updatedAt: string;
-		publishedAt: string;
-		slug: string;
-		date: string;
-		location: string;
-		description: string;
-		image: {
-			data: IImageData;
-		};
-		category: {
-			data: ICategory;
-		};
-	};
-}
-
 export interface IGalleryPreviewSection
 	extends IBaseSection<"sections.gallery-preview"> {
 	galleryItems: IGalleryItems;
@@ -147,29 +128,13 @@ interface ITestimonial {
 
 export interface INewsPreviewSection
 	extends IBaseSection<"sections.news-preview"> {
-	newsItems: INewsItems;
+	newsItems: IArticles;
 }
 
-interface INewsItems {
-	data: INewsItem[];
+interface IArticles {
+	data: IArticle[];
 }
 
-interface INewsItem {
-	id: number;
-	attributes: {
-		title: string;
-		slug: string;
-		publishedAt: string;
-		image: {
-			data: IImageData;
-		};
-		category: {
-			data: ICategory;
-		};
-		description: string;
-		author: string;
-	};
-}
 interface IBenefit {
 	text: string;
 }

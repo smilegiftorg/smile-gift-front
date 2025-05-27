@@ -49,7 +49,7 @@ export default function VolunteerCTA(props: IVolunteerCTASection) {
 			<h4 className="font-semibold mb-3">Bạn sẽ nhận được:</h4>
 			<ul className="list-disc pl-5 text-neutral-600 mb-6">
 				{benefits?.map((benefit, index) => (
-					<li key={index}>{benefit.text}</li>
+					<li key={index}>{benefit.text || "/"}</li>
 				))}
 			</ul>
 

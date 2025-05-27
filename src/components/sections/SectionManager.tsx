@@ -17,6 +17,7 @@ import VolunteerCTA from "./VolunteerCTA";
 import DonationSection from "./DonationSection";
 import {
 	IHeaderSection,
+	IJoinUsCtaSection,
 	IMissionAndValuesSection,
 	IOurStorySection,
 	ITeamSection,
@@ -26,6 +27,7 @@ import OurStory from "./OurStory";
 import MissionAndValues from "./MissionAndValues";
 import Team from "./TeamSection";
 import TeamSection from "./TeamSection";
+import JoinUsCta from "./JoinUsCta";
 
 const Hero = dynamic(() => import("./Hero"), { ssr: true });
 const AboutPreview = dynamic(() => import("./AboutPreview"), { ssr: true });
@@ -46,7 +48,8 @@ type SectionType =
 	| IHeaderSection
 	| IOurStorySection
 	| IMissionAndValuesSection
-	| ITeamSection;
+	| ITeamSection
+	| IJoinUsCtaSection;
 
 const SectionManager = ({ sections }: { sections: SectionType[] }) => {
 	return (
@@ -133,6 +136,13 @@ const SectionManager = ({ sections }: { sections: SectionType[] }) => {
 						return (
 							<div key={`index-${index}`}>
 								<TeamSection {...teamSection} />
+							</div>
+						);
+					case "sections.join-us-cta":
+						const joinUsCtaSection = section as IJoinUsCtaSection;
+						return (
+							<div key={`index-${index}`}>
+								<JoinUsCta {...joinUsCtaSection} />
 							</div>
 						);
 					default:
