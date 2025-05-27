@@ -25,6 +25,9 @@ export interface IProgram {
 		gallery: Gallery;
 		sections: Section[];
 		seo: ISeo;
+		relatedPrograms: {
+			data: IProgram[];
+		};
 	};
 }
 

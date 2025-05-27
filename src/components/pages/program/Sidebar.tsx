@@ -1,9 +1,9 @@
 "use client";
 
-import { allPrograms, getRelatedPrograms } from "@/app/programs/[slug]/helpers";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import { IProgram } from "@/types/IProgram";
+import { getStrapiMedia } from "@/utils/helpers";
 import { Calendar, Info, MapPin, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,6 +18,7 @@ function Sidebar(props: ISidebarProps) {
 	const results = program.sections?.find(
 		(item) => item.__component === "program.results"
 	);
+	const relatedPrograms = program?.relatedPrograms?.data || [];
 	return (
 		<div className="lg:col-span-1">
 			{program.status === "upcoming" ? (
@@ -124,49 +125,54 @@ function Sidebar(props: ISidebarProps) {
 			)}
 
 			{/* Related Programs */}
-			{/* {relatedPrograms.length > 0 && (
+			{relatedPrograms.length > 0 && (
 				<div className="bg-white rounded-xl shadow-sm border border-neutral-200 overflow-hidden">
 					<div className="p-6 border-b">
 						<h2 className="text-xl font-bold">Chương trình liên quan</h2>
 					</div>
 
 					<div className="divide-y">
-						{relatedPrograms.map((relatedProgram) => (
-							<Link
-								key={relatedProgram.id}
-								href={`/programs/${relatedProgram.id}`}
-							>
-								<Card
-									className="hover:bg-neutral-50 transition-colors border-none shadow-none rounded-none"
-									hoverEffect={false}
-								>
-									<div className="p-4">
-										<div className="flex gap-4">
-											<div className="relative h-20 w-20 flex-shrink-0 rounded-lg overflow-hidden">
-												<Image
-													src={relatedProgram.image}
-													alt={relatedProgram.title}
-													fill
-													className="object-cover"
-												/>
-											</div>
-											<div>
-												<h3 className="font-medium line-clamp-2 mb-2 group-hover:text-primary-700 transition-colors">
-													{relatedProgram.title}
-												</h3>
-												<div className="flex items-center text-sm text-neutral-500">
-													<Calendar className="h-3 w-3 mr-1" />
-													{relatedProgram.date}
+						{relatedPrograms.map((relatedProgram) => {
+							const { image, title, date, slug } =
+								relatedProgram?.attributes || {};
+
+							return (
+								<Link key={slug} href={`/programs/${slug}`}>
+									<Card
+										className="hover:bg-neutral-50 transition-colors border-none shadow-none rounded-none"
+										hoverEffect={false}
+									>
+										<div className="p-4">
+											<div className="flex gap-4">
+												<div className="relative h-20 w-20 flex-shrink-0 rounded-lg overflow-hidden">
+													<Image
+														src={getStrapiMedia(
+															image?.data?.attributes?.formats?.thumbnail
+																?.url || ""
+														)}
+														alt={title}
+														fill
+														className="object-cover"
+													/>
+												</div>
+												<div>
+													<h3 className="font-medium line-clamp-2 mb-2 group-hover:text-primary-700 transition-colors text-base">
+														{title}
+													</h3>
+													<div className="flex items-center text-sm text-neutral-500">
+														<Calendar className="h-3 w-3 mr-1" />
+														{date}
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-								</Card>
-							</Link>
-						))}
+									</Card>
+								</Link>
+							);
+						})}
 					</div>
 				</div>
-			)} */}
+			)}
 		</div>
 	);
 }
