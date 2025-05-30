@@ -56,12 +56,12 @@ function ProgramCard({ program }: { program: IProgram }) {
 
 				{isUpcoming ? (
 					<div className="grid grid-cols-2 gap-2 mt-2">
-						<Link href={`/programs/${slug}`}>
+						<Link href={`/du-an/${slug}`}>
 							<Button variant="outline" size="sm" fullWidth>
 								Chi tiết
 							</Button>
 						</Link>
-						<Link href={`/programs/${program.id}/register`}>
+						<Link href={`/du-an/${slug}/dang-ky`}>
 							<Button variant="primary" size="sm" fullWidth className="h-full">
 								Đăng ký
 							</Button>
@@ -83,7 +83,7 @@ function ProgramCard({ program }: { program: IProgram }) {
 								<div className="text-sm text-neutral-500">Người thụ hưởng</div>
 							</div>
 						</div>
-						<Link href={`/programs/${slug}`}>
+						<Link href={`/du-an/${slug}`}>
 							<Button variant="outline" size="sm" fullWidth>
 								Xem kết quả
 							</Button>

@@ -45,14 +45,17 @@ function ArticleCard({ article }: { article: IArticle }) {
 					<p className="text-neutral-600 line-clamp-3">{description}</p>
 				</div>
 
-				<Button
-					variant="outline"
-					size="sm"
-					rightIcon={<FaArrowRight />}
-					className="mt-auto"
-				>
-					<Link href={`/news/${article.id}`}>Đọc tiếp</Link>
-				</Button>
+				<Link href={`/tin-tuc/${article.attributes.slug}`}>
+					<Button
+						variant="outline"
+						size="sm"
+						rightIcon={<FaArrowRight />}
+						className="mt-auto"
+						fullWidth
+					>
+						Đọc tiếp
+					</Button>
+				</Link>
 			</div>
 		</Card>
 	);

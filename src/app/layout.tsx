@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import { Providers } from "./providers";
 import { getStrapiURL } from "@/utils/api";
 import { getStrapiMedia } from "@/utils/helpers";
+import { Toaster } from "sonner";
 
 const montserrat = Montserrat({
 	subsets: ["latin", "vietnamese"],
@@ -124,6 +125,7 @@ export default async function RootLayout({
 			className={`${montserrat.variable} ${opensans.variable} ${playfair.variable}`}
 		>
 			<body className="font-body">
+				<Toaster />
 				<NextTopLoader showSpinner={false} color="#194923" />
 				<Providers>
 					<Header data={header} />

@@ -47,10 +47,10 @@ export default async function ProgramDetailPage({ params }: IPageProps) {
 	try {
 		const options = getProgramQueryOptions(slug);
 		await queryClient.prefetchQuery(options);
-		const teacher = queryClient.getQueryData<IDataResponse<IProgram>>(
+		const program = queryClient.getQueryData<IDataResponse<IProgram>>(
 			options.queryKey
 		);
-		if (!teacher?.data) {
+		if (!program?.data) {
 			return <NoData />;
 		}
 		const dehydratedState = dehydrate(queryClient);

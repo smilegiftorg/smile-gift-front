@@ -1,8 +1,8 @@
 "use client";
 
-import { allPrograms } from "@/app/programs/[slug]/helpers";
 import GallerySection from "@/components/sections/GallerySection";
 import ResultsSection from "@/components/sections/ResultsSection";
+import RichText from "@/components/ui/RichText";
 import { IProgram } from "@/types/IProgram";
 import { Clock } from "lucide-react";
 import { useState } from "react";
@@ -85,13 +85,7 @@ function MainContent(props: IMainContentProps) {
 						<div>
 							<div className="prose max-w-none">
 								<h2 className="text-2xl font-bold mb-6">Mô tả chương trình</h2>
-								{program.longDescription
-									.split("\n")
-									.map((paragraph: string, idx: number) => (
-										<p key={idx} className="mb-4 text-neutral-600">
-											{paragraph.trim()}
-										</p>
-									))}
+								<RichText content={program.longDescription || ""} />
 							</div>
 						</div>
 					)}

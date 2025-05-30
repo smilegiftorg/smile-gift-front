@@ -19,7 +19,7 @@ export async function generateMetadata() {
 		{
 			filters: {
 				slug: {
-					$eq: "programs",
+					$eq: "du-an",
 				},
 			},
 			populate: {
@@ -46,7 +46,7 @@ export async function generateMetadata() {
 }
 
 export default async function ProgramsPage() {
-	const page = await getPage("programs", {
+	const page = await getPage("du-an", {
 		populate: {
 			backgroundImage: true,
 			highlightBox: true,

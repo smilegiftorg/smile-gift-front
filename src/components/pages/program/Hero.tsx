@@ -5,15 +5,7 @@ import StatusBadge from "@/components/shared/program/StatusBadge";
 import Button from "@/components/ui/Button";
 import { IProgram } from "@/types/IProgram";
 import { getStrapiMedia } from "@/utils/helpers";
-import {
-	ArrowLeft,
-	Calendar,
-	Clock,
-	MapPin,
-	Share2,
-	Tag,
-	Users,
-} from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Share2, Tag, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -23,7 +15,6 @@ interface IHeroProps {
 }
 function Hero({ data }: IHeroProps) {
 	const program = data?.attributes || {};
-	const programId = data?.id;
 	const [showShareOptions, setShowShareOptions] = useState(false);
 	if (!program) {
 		return null;
@@ -45,12 +36,11 @@ function Hero({ data }: IHeroProps) {
 					className="opacity-40"
 					priority
 				/>
-				<div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
 			</div>
 
 			<div className="container relative z-10 pt-16 pb-12 md:pt-24 md:pb-20 px-4 mx-auto">
 				<Link
-					href="/programs"
+					href="/du-an"
 					className="inline-flex items-center text-white/90 hover:text-white mb-8 transition-colors group"
 				>
 					<ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
@@ -94,15 +84,15 @@ function Hero({ data }: IHeroProps) {
 
 					<div className="flex flex-wrap gap-4">
 						{program.status === "upcoming" && (
-							<Button
-								variant="primary"
-								size="lg"
-								className="bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600"
-							>
-								<Link href={`/programs/${programId}/register`}>
+							<Link href={`/du-an/${program.slug}/dang-ky`}>
+								<Button
+									variant="primary"
+									size="lg"
+									className="bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 h-full"
+								>
 									Đăng ký tham gia ngay
-								</Link>
-							</Button>
+								</Button>
+							</Link>
 						)}
 
 						<div className="relative">
@@ -117,8 +107,11 @@ function Hero({ data }: IHeroProps) {
 							</Button>
 
 							{showShareOptions && (
-								<div className="absolute top-full mt-2 right-0 bg-white rounded-lg shadow-lg p-4 min-w-[300px] z-50">
-									<ShareButtons program={program} />
+								<div className="absolute top-full mt-2 left-0 bg-white rounded-lg shadow-lg p-4 min-w-[300px] z-50">
+									<ShareButtons
+										programSlug={program?.slug}
+										title={program?.title}
+									/>
 								</div>
 							)}
 						</div>

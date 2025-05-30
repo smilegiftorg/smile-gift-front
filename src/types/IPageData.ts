@@ -74,3 +74,31 @@ export interface IJoinUsCtaSection
 	extends IBaseSection<"sections.join-us-cta"> {
 	buttons: IButton[];
 }
+
+export interface IDonationImpactSection
+	extends IBaseSection<"sections.donation-impact"> {
+	impacts: IImpact[];
+}
+
+interface IImpact {
+	id: number;
+	amount: string;
+	impact: string;
+	icon: string;
+}
+
+export interface IBankTransferSection extends IBaseSection<"ui.bank-info"> {
+	bankName: string;
+	accountNumber: string;
+	accountHolder: string;
+}
+
+export interface ITransparency extends IBaseSection<"sections.transparency"> {
+	content: string;
+	button: IButton;
+}
+
+export interface IContactSection
+	extends IBaseSection<"sections.contact-section"> {
+	buttons: IButton[];
+}

@@ -2,7 +2,7 @@ export interface IButton {
 	id: number;
 	text: string;
 	link: string;
-	variant: "secondary" | "outline";
+	variant: "secondary" | "outline" | "primary";
 	icon: string;
 }
 

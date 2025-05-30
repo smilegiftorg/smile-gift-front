@@ -1,4 +1,4 @@
-import { ICategory, IImageData } from "./ICommon";
+import { ICategory, IImageData, ISeo } from "./ICommon";
 
 export interface IArticle {
 	id: number;
@@ -18,5 +18,6 @@ export interface IArticle {
 		relatedArticles: {
 			data: IArticle[];
 		};
+		seo: ISeo;
 	};
 }

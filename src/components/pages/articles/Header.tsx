@@ -1,20 +1,14 @@
 "use client";
 
-import React, { ChangeEvent, useCallback } from "react";
-import Image from "next/image";
-import { FaSearch } from "react-icons/fa";
-import { IHeaderSection } from "@/types/IPageData";
-import { getStrapiMedia } from "@/utils/helpers";
-import { useCategory, useSearch, useStatus } from "@/hooks/programs/useFilter";
 import { useQueryCategories } from "@/apis/category/getCategories.api";
 import FieldSearch from "@/components/ui/FieldSearch";
+import { useCategory, useSearch } from "@/hooks/programs/useFilter";
+import { IHeaderSection } from "@/types/IPageData";
+import { getStrapiMedia } from "@/utils/helpers";
+import Image from "next/image";
+import { ChangeEvent, useCallback } from "react";
 
 function Header(props: IHeaderSection) {
-	const {
-		setFilter: setStatus,
-		removeFilter: removeStatus,
-		filterValue: status,
-	} = useStatus();
 	const { setFilter: setSearch, filterValue: search } = useSearch();
 	const {
 		setFilter: setCategory,

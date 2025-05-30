@@ -4,9 +4,10 @@ import Button from "@/components/ui/Button";
 import Pagination from "@/components/ui/Pagination";
 import { useCategory, useSearch } from "@/hooks/articles/useFilter";
 import { usePagination } from "@/hooks/usePagination";
-import { IArticle } from "@/types/IHomePage";
+import { IArticle } from "@/types/IArticle";
 import { FaInbox } from "react-icons/fa";
 import ArticleCard from "./ArticleCard";
+import CardSkeletons from "@/components/ui/CardSkeletons";
 
 function AllPrograms() {
 	const { filterValue: search } = useSearch();
@@ -26,23 +27,7 @@ function AllPrograms() {
 	return (
 		<section className="py-16">
 			<div className="container-custom">
-				{isFetching && (
-					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{[1, 2, 3, 4, 5, 6].map((n) => (
-							<div key={n} className="animate-pulse">
-								<div className="bg-neutral-200 h-48 rounded-t-lg"></div>
-								<div className="bg-white p-6 rounded-b-lg">
-									<div className="h-4 bg-neutral-200 rounded w-3/4 mb-4"></div>
-									<div className="h-8 bg-neutral-200 rounded mb-4"></div>
-									<div className="space-y-2">
-										<div className="h-4 bg-neutral-200 rounded"></div>
-										<div className="h-4 bg-neutral-200 rounded w-5/6"></div>
-									</div>
-								</div>
-							</div>
-						))}
-					</div>
-				)}
+				{isFetching && <CardSkeletons />}
 				{!isFetching && articlesData?.length > 0 && (
 					<>
 						<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

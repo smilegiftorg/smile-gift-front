@@ -1,7 +1,7 @@
 import { itemsPerPageDefault } from "@/configs/pagination.config";
 import { QueryConfig } from "@/configs/react-query";
 import { IDataResponse } from "@/types/ICommon";
-import { IProgram } from "@/types/IHomePage";
+import { IProgram } from "@/types/IProgram";
 import { fetchAPI } from "@/utils/api";
 import { queryOptions, useQuery } from "@tanstack/react-query";
 
