@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: ["images.pexels.com", "localhost", "res.cloudinary.com"],
+		domains: [
+			"images.pexels.com",
+			"localhost",
+			"res.cloudinary.com",
+			"smile-gift-cms-production.up.railway.app",
+		],
 	},
 	async rewrites() {
 		return [

@@ -7,11 +7,11 @@ import qs from "qs";
  */
 export function getStrapiURL(path = "") {
 	let fullUrl = `${
-		process.env.STRAPI_API_URL || "http://localhost:1337"
+		process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337"
 	}/${path}`;
 	if (typeof window === undefined) {
 		fullUrl = `${
-			process.env.STRAPI_API_URL || "http://localhost:1337"
+			process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337"
 		}/${path}`;
 	}
 	return fullUrl;
