@@ -11,6 +11,7 @@ import { FaArrowRight, FaCalendarAlt, FaUserAlt } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
 import Description from "../ui/Description";
 import ViewAllButton from "../ui/ViewAllButton";
+import ArticleCard from "../pages/articles/ArticleCard";
 
 export default function NewsPreview(props: INewsPreviewSection) {
 	const [ref, inView] = useInView({
@@ -37,9 +38,7 @@ export default function NewsPreview(props: INewsPreviewSection) {
 				</motion.div>
 
 				<div className="grid md:grid-cols-3 gap-8">
-					{newsItems?.data?.map((news, index) => {
-						const { image, title, category, publishedAt, author, description } =
-							news?.attributes || {};
+					{newsItems?.data?.slice(0, 3)?.map((news, index) => {
 						return (
 							<motion.div
 								key={news.id}
@@ -47,53 +46,7 @@ export default function NewsPreview(props: INewsPreviewSection) {
 								animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
 								transition={{ duration: 0.5, delay: index * 0.1 }}
 							>
-								<Card className="h-full flex flex-col">
-									<div className="relative h-48 w-full">
-										<Image
-											src={getStrapiMedia(
-												image?.data?.attributes?.formats?.medium?.url || ""
-											)}
-											alt={title}
-											fill
-											className="object-cover"
-										/>
-										<div className="absolute top-3 left-3 bg-primary-700 text-white text-xs font-medium px-3 py-1 rounded-full">
-											{category?.data?.attributes?.name}
-										</div>
-									</div>
-
-									<div className="p-6 flex-grow flex flex-col">
-										<div className="mb-3 flex items-center justify-between text-sm text-neutral-500">
-											<div className="flex items-center">
-												<FaCalendarAlt className="mr-1" size={12} />
-												{publishedAt}
-											</div>
-											<div className="flex items-center">
-												<FaUserAlt className="mr-1" size={12} />
-												{author}
-											</div>
-										</div>
-
-										<h3 className="text-xl font-bold mb-3 line-clamp-2">
-											{title}
-										</h3>
-
-										<div className="mb-4 flex-grow">
-											<p className="text-neutral-600 line-clamp-3">
-												{description}
-											</p>
-										</div>
-
-										<Button
-											variant="outline"
-											size="sm"
-											rightIcon={<FaArrowRight />}
-											className="mt-auto"
-										>
-											<Link href={`/news/${news.id}`}>Đọc tiếp</Link>
-										</Button>
-									</div>
-								</Card>
+								<ArticleCard article={news} />
 							</motion.div>
 						);
 					})}

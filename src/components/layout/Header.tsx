@@ -83,10 +83,10 @@ export default function Header({ data }: IHeaderProps) {
 				</nav>
 
 				<div className="hidden md:flex items-center space-x-4">
-					<Link href={contactPath} className="btn btn-primary">
+					{/* <Link href={contactPath} className="btn btn-primary">
 						<FaRegEnvelopeOpen className="mr-2" />
 						{contactLabel}
-					</Link>
+					</Link> */}
 				</div>
 
 				{/* Mobile Navigation Toggle */}
@@ -124,7 +124,7 @@ export default function Header({ data }: IHeaderProps) {
 									</Link>
 								))}
 
-								<div className="flex flex-col space-y-3 pt-3 border-t border-neutral-100">
+								{/* <div className="flex flex-col space-y-3 pt-3 border-t border-neutral-100">
 									<Link
 										href="/contact"
 										className="py-2 px-4 bg-primary-700 text-white rounded-lg flex items-center"
@@ -132,7 +132,7 @@ export default function Header({ data }: IHeaderProps) {
 										<FaRegEnvelopeOpen className="mr-2" />
 										{language === "vi" ? "Liên hệ" : "Contact"}
 									</Link>
-								</div>
+								</div> */}
 							</nav>
 						</div>
 					</motion.div>

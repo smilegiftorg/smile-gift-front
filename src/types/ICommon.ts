@@ -2,7 +2,7 @@ export interface IButton {
 	id: number;
 	text: string;
 	link: string;
-	variant: "secondary" | "outline";
+	variant: "secondary" | "outline" | "primary";
 	icon: string;
 }
 
@@ -72,4 +72,47 @@ export interface IBaseSection<T> {
 	title: string;
 	description: string;
 	viewAllButton: IButton;
+}
+
+export interface IPageProps {
+	params: { slug: string[] };
+}
+
+export interface IDataResponse<T> {
+	data: T;
+	meta: {
+		pagination: IPagination;
+	};
+}
+
+interface IPagination {
+	page: number;
+	pageSize: number;
+	pageCount: number;
+	total: number;
+}
+
+export interface ISeo {
+	id: number;
+	metaTitle: string;
+	metaDescription: string;
+	keywords: null;
+	metaRobots: null;
+	structuredData: null;
+	metaViewport: null;
+	canonicalURL: null;
+	metaSocial: MetaSocial[];
+	metaImage: {
+		data: IImageData;
+	};
+}
+
+interface MetaSocial {
+	id: number;
+	socialNetwork: string;
+	title: string;
+	description: string;
+	image: {
+		data: IImageData;
+	};
 }

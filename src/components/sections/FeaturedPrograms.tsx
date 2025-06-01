@@ -1,18 +1,11 @@
 "use client";
 
-import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
 import { IFeaturedProgramsSection } from "@/types/IHomePage";
-import { getStrapiMedia } from "@/utils/helpers";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
-import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
+import ProgramCard from "../pages/programs/ProgramCard";
 import Description from "../ui/Description";
 import ViewAllButton from "../ui/ViewAllButton";
-import { formatShortDate } from "@/utils/dateTimeHelper";
-import ProgramCard from "../pages/programs/ProgramCard";
 
 export default function FeaturedPrograms(props: IFeaturedProgramsSection) {
 	const [ref, inView] = useInView({
@@ -21,7 +14,6 @@ export default function FeaturedPrograms(props: IFeaturedProgramsSection) {
 	});
 
 	const { title, description, programs, viewAllButton } = props;
-	console.log("props: ", props?.programs?.data);
 
 	return (
 		<section className="py-20" id="upcoming-programs">
@@ -41,7 +33,7 @@ export default function FeaturedPrograms(props: IFeaturedProgramsSection) {
 				</motion.div>
 
 				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{programs?.data.map((program, index) => (
+					{programs?.data?.slice(0, 3).map((program, index) => (
 						<motion.div
 							key={program.id}
 							initial={{ opacity: 0, y: 30 }}

@@ -8,7 +8,7 @@ const ViewAllButton: React.FC<IButton> = ({ variant, link, text, icon }) => {
 	const IconComp = getIconComponent(icon);
 	return (
 		<Button variant={variant} rightIcon={IconComp ? <IconComp /> : undefined}>
-			<Link href={link}>{text}</Link>
+			<Link href={link || "/"}>{text}</Link>
 		</Button>
 	);
 };

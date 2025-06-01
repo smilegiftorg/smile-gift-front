@@ -3,9 +3,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
+import { IImageData } from "@/types/ICommon";
+import { getStrapiMedia } from "@/utils/helpers";
 
 interface GallerySectionProps {
-	images: string[];
+	images: IImageData[];
 	title: string;
 }
 
@@ -17,20 +19,27 @@ export default function GallerySection({ images, title }: GallerySectionProps) {
 			<h2 className="text-2xl font-bold mb-6">Hình ảnh chương trình</h2>
 
 			<div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-				{images.map((image, index) => (
-					<div
-						key={index}
-						className="relative aspect-square cursor-pointer overflow-hidden rounded-lg"
-						onClick={() => setSelectedImage(image)}
-					>
-						<Image
-							src={image}
-							alt={`${title} - Hình ${index + 1}`}
-							fill
-							className="object-cover hover:scale-105 transition-transform duration-300"
-						/>
-					</div>
-				))}
+				{images.map((image, index) => {
+					const url = getStrapiMedia(
+						image?.attributes?.formats?.medium?.url ||
+							image?.attributes?.url ||
+							""
+					);
+					return (
+						<div
+							key={index}
+							className="relative aspect-square cursor-pointer overflow-hidden rounded-lg"
+							onClick={() => setSelectedImage(url)}
+						>
+							<Image
+								src={url}
+								alt={`${title} - Hình ${index + 1}`}
+								fill
+								className="object-cover hover:scale-105 transition-transform duration-300"
+							/>
+						</div>
+					);
+				})}
 			</div>
 
 			{/* Lightbox */}

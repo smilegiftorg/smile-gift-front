@@ -1,15 +1,28 @@
+import StatusBadge from "@/components/shared/program/StatusBadge";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
-import { IProgram } from "@/types/IHomePage";
-import { formatShortDate } from "@/utils/dateTimeHelper";
+import { IProgram } from "@/types/IProgram";
 import { getStrapiMedia } from "@/utils/helpers";
 import Image from "next/image";
 import Link from "next/link";
 import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 function ProgramCard({ program }: { program: IProgram }) {
-	const { image, category, date, location, title, description } =
-		program?.attributes || {};
+	const {
+		image,
+		category,
+		date,
+		location,
+		title,
+		description,
+		status,
+		slug,
+		sections,
+	} = program?.attributes || {};
+	const isUpcoming = status === "upcoming";
+	const results = sections?.find(
+		(item) => item.__component === "program.results"
+	);
 	return (
 		<Card className="h-full flex flex-col">
 			<div className="relative h-48 w-full">
@@ -21,8 +34,11 @@ function ProgramCard({ program }: { program: IProgram }) {
 					fill
 					className="object-cover"
 				/>
-				<div className="absolute top-3 left-3 bg-primary-700 text-white text-sm font-medium px-3 py-1 rounded-full">
-					{category?.data?.attributes?.name}
+				<div className="absolute top-3 left-3 flex gap-2">
+					<span className="bg-primary-700 text-white text-xs font-medium px-3 py-1 rounded-full">
+						{category?.data?.attributes?.name}
+					</span>
+					<StatusBadge status={status} />
 				</div>
 			</div>
 
@@ -38,15 +54,42 @@ function ProgramCard({ program }: { program: IProgram }) {
 
 				<p className="text-neutral-600 mb-4 flex-grow">{description}</p>
 
-				<div className="grid grid-cols-2 gap-2 mt-2">
-					<Button variant="outline" size="sm">
-						<Link href={`/programs/${program.id}`}>Chi tiết</Link>
-					</Button>
-
-					<Button variant="primary" size="sm">
-						<Link href={`/programs/${program.id}/register`}>Đăng ký</Link>
-					</Button>
-				</div>
+				{isUpcoming ? (
+					<div className="grid grid-cols-2 gap-2 mt-2">
+						<Link href={`/du-an/${slug}`}>
+							<Button variant="outline" size="sm" fullWidth>
+								Chi tiết
+							</Button>
+						</Link>
+						<Link href={`/du-an/${slug}/dang-ky`}>
+							<Button variant="primary" size="sm" fullWidth className="h-full">
+								Đăng ký
+							</Button>
+						</Link>
+					</div>
+				) : (
+					<div className="mt-4 pt-4 border-t border-neutral-100">
+						<div className="grid grid-cols-2 gap-4 mb-4">
+							<div className="text-center">
+								<div className="text-2xl font-bold text-primary-600">
+									{results?.volunteersParticipated || 0}
+								</div>
+								<div className="text-sm text-neutral-500">TNV tham gia</div>
+							</div>
+							<div className="text-center">
+								<div className="text-2xl font-bold text-primary-600">
+									{results?.beneficiaries || 0}
+								</div>
+								<div className="text-sm text-neutral-500">Người thụ hưởng</div>
+							</div>
+						</div>
+						<Link href={`/du-an/${slug}`}>
+							<Button variant="outline" size="sm" fullWidth>
+								Xem kết quả
+							</Button>
+						</Link>
+					</div>
+				)}
 			</div>
 		</Card>
 	);

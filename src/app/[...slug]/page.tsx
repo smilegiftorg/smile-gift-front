@@ -1,15 +1,14 @@
 import SectionManager from "@/components/sections/SectionManager";
+import { IPageProps } from "@/types/ICommon";
 import { fetchAPI } from "@/utils/api";
 import { getStrapiMedia } from "@/utils/helpers";
+import { notFound, redirect } from "next/navigation";
 
-interface IPageProps {
-	params: { slug: string[] };
-}
 export async function generateMetadata({ params }: IPageProps) {
 	const slug = params?.slug?.join("/");
 
 	const data = await fetchAPI(
-		"/pages",
+		"api/pages",
 		{
 			filters: {
 				slug: {
@@ -81,7 +80,7 @@ export async function generateMetadata({ params }: IPageProps) {
 async function Universals({ params }: IPageProps) {
 	const slug = params?.slug?.join("/");
 	const data = await fetchAPI(
-		"/pages",
+		"api/pages",
 		{
 			filters: {
 				slug: {
@@ -101,6 +100,8 @@ async function Universals({ params }: IPageProps) {
 						members: {
 							populate: ["image"],
 						},
+						impacts: true,
+						buttons: true,
 					},
 				},
 			},
@@ -109,8 +110,10 @@ async function Universals({ params }: IPageProps) {
 			next: { revalidate: 60 },
 		}
 	);
+	if (!data?.data || data?.data?.length <= 0) {
+		notFound();
+	}
 	const sections = data?.data?.[0]?.attributes?.sessions || [];
-	console.log("sections: ", sections);
 	return (
 		<div className="pt-24">
 			<SectionManager sections={sections} />

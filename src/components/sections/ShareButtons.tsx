@@ -5,16 +5,20 @@ import { Facebook, Twitter, Mail, Linkedin, Link2 } from "lucide-react";
 import { toast } from "sonner";
 
 interface ShareButtonsProps {
-	program: any;
+	programSlug: string;
+	title: string;
 }
 
-export default function ShareButtons({ program }: ShareButtonsProps) {
+export default function ShareButtons({
+	programSlug,
+	title,
+}: ShareButtonsProps) {
 	const shareUrl =
 		typeof window !== "undefined"
-			? `${window.location.origin}/programs/${program.id}`
+			? `${window.location.origin}/programs/${programSlug}`
 			: "";
 
-	const shareText = `Tham gia chương trình "${program.title}" cùng CLB Thiện Nguyện Smile Gift!`;
+	const shareText = `Tham gia chương trình "${title}" cùng CLB Thiện Nguyện Smile Gift!`;
 
 	const handleCopyLink = () => {
 		navigator.clipboard.writeText(shareUrl);
@@ -30,10 +34,7 @@ export default function ShareButtons({ program }: ShareButtonsProps) {
 					className="flex items-center px-4 py-2 bg-[#1877F2] hover:bg-[#1877F2]/90 text-white rounded-lg text-sm"
 					onClick={() =>
 						window.open(
-							`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-								shareUrl
-							)}`,
-							"_blank"
+							`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`
 						)
 					}
 				>
@@ -45,9 +46,7 @@ export default function ShareButtons({ program }: ShareButtonsProps) {
 					className="flex items-center px-4 py-2 bg-[#1DA1F2] hover:bg-[#1DA1F2]/90 text-white rounded-lg text-sm"
 					onClick={() =>
 						window.open(
-							`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-								shareText
-							)}&url=${encodeURIComponent(shareUrl)}`,
+							`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`,
 							"_blank"
 						)
 					}
@@ -60,9 +59,7 @@ export default function ShareButtons({ program }: ShareButtonsProps) {
 					className="flex items-center px-4 py-2 bg-[#0A66C2] hover:bg-[#0A66C2]/90 text-white rounded-lg text-sm"
 					onClick={() =>
 						window.open(
-							`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-								shareUrl
-							)}`,
+							`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`,
 							"_blank"
 						)
 					}

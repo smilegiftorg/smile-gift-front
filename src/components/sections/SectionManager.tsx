@@ -1,5 +1,3 @@
-import React from "react";
-import dynamic from "next/dynamic";
 import {
 	IAboutPreviewSection,
 	IFeaturedProgramsSection,
@@ -10,22 +8,18 @@ import {
 	ITestimonialsSection,
 	IVolunteerCTASection,
 } from "@/types/IHomePage";
-import GalleryPreview from "./GalleryPreview";
-import TestimonialsSection from "./TestimonialsSection";
-import NewsPreview from "./NewsPreview";
-import VolunteerCTA from "./VolunteerCTA";
-import DonationSection from "./DonationSection";
 import {
+	IBankTransferSection,
+	IContactSection,
+	IDonationImpactSection,
 	IHeaderSection,
+	IJoinUsCtaSection,
 	IMissionAndValuesSection,
 	IOurStorySection,
 	ITeamSection,
+	ITransparency,
 } from "@/types/IPageData";
-import Header from "./Header";
-import OurStory from "./OurStory";
-import MissionAndValues from "./MissionAndValues";
-import Team from "./TeamSection";
-import TeamSection from "./TeamSection";
+import dynamic from "next/dynamic";
 
 const Hero = dynamic(() => import("./Hero"), { ssr: true });
 const AboutPreview = dynamic(() => import("./AboutPreview"), { ssr: true });
@@ -33,6 +27,24 @@ const ImpactStats = dynamic(() => import("./ImpactStats"), { ssr: true });
 const FeaturedPrograms = dynamic(() => import("./FeaturedPrograms"), {
 	ssr: true,
 });
+const DonationImpacts = dynamic(() => import("./DonationImpacts"), {
+	ssr: true,
+});
+const GalleryPreview = dynamic(() => import("./GalleryPreview"), { ssr: true });
+const Header = dynamic(() => import("./Header"), { ssr: true });
+const JoinUsCta = dynamic(() => import("./JoinUsCta"), { ssr: true });
+const MissionAndValues = dynamic(() => import("./MissionAndValues"), {
+	ssr: true,
+});
+const NewsPreview = dynamic(() => import("./NewsPreview"), { ssr: true });
+const OurStory = dynamic(() => import("./OurStory"), { ssr: true });
+const TeamSection = dynamic(() => import("./TeamSection"), { ssr: true });
+const TestimonialsSection = dynamic(() => import("./TestimonialsSection"), {
+	ssr: true,
+});
+const BankTransfer = dynamic(() => import("./BankTransfer"), { ssr: true });
+const Transparency = dynamic(() => import("./Transparency"), { ssr: true });
+const ContactSection = dynamic(() => import("./ContactSection"), { ssr: true });
 
 type SectionType =
 	| IHeroSection
@@ -46,7 +58,12 @@ type SectionType =
 	| IHeaderSection
 	| IOurStorySection
 	| IMissionAndValuesSection
-	| ITeamSection;
+	| ITeamSection
+	| IJoinUsCtaSection
+	| IDonationImpactSection
+	| IBankTransferSection
+	| ITransparency
+	| IContactSection;
 
 const SectionManager = ({ sections }: { sections: SectionType[] }) => {
 	return (
@@ -77,7 +94,6 @@ const SectionManager = ({ sections }: { sections: SectionType[] }) => {
 						);
 					case "sections.featured-programs":
 						const featuredProgramsSection = section as IFeaturedProgramsSection;
-						console.log("featuredProgramsSection: ", featuredProgramsSection);
 						return (
 							<div key={`index-${index}`}>
 								<FeaturedPrograms {...featuredProgramsSection} />
@@ -135,6 +151,41 @@ const SectionManager = ({ sections }: { sections: SectionType[] }) => {
 								<TeamSection {...teamSection} />
 							</div>
 						);
+					case "sections.join-us-cta":
+						const joinUsCtaSection = section as IJoinUsCtaSection;
+						return (
+							<div key={`index-${index}`}>
+								<JoinUsCta {...joinUsCtaSection} />
+							</div>
+						);
+					case "sections.donation-impact":
+						const donationImpactSection = section as IDonationImpactSection;
+						return (
+							<div key={`index-${index}`}>
+								<DonationImpacts {...donationImpactSection} />
+							</div>
+						);
+					case "ui.bank-info":
+						const bankTransferSection = section as IBankTransferSection;
+						return (
+							<div key={`index-${index}`}>
+								<BankTransfer {...bankTransferSection} />
+							</div>
+						);
+					case "sections.transparency":
+						const transparency = section as ITransparency;
+						return (
+							<div key={`index-${index}`}>
+								<Transparency {...transparency} />
+							</div>
+						);
+					// case "sections.contact-section":
+					// 	const contactSection = section as IContactSection;
+					// 	return (
+					// 		<div key={`index-${index}`}>
+					// 			<ContactSection {...contactSection} />
+					// 		</div>
+					// 	);
 					default:
 						return null;
 				}
