@@ -53,7 +53,6 @@ export default function Header({ data }: IHeaderProps) {
 								alt="logo"
 								width={48}
 								height={48}
-								className={scrolled || !isHomePage ? "" : "brightness-0 invert"}
 							/>
 						</div>
 					</div>
