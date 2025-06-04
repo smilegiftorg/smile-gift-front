@@ -20,6 +20,7 @@ export default function Header({ data }: IHeaderProps) {
 	const pathname = usePathname();
 	const { language, setLanguage } = useLanguage();
 	const { logo, navItems, title, subtitle, contactLabel, contactPath } = data;
+	const isHomePage = pathname === "/";
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -52,21 +53,25 @@ export default function Header({ data }: IHeaderProps) {
 								alt="logo"
 								width={48}
 								height={48}
-								className={scrolled ? "" : "brightness-0 invert"}
+								className={scrolled || !isHomePage ? "" : "brightness-0 invert"}
 							/>
 						</div>
 					</div>
 					<div>
 						<span
 							className={`block text-xl font-bold leading-tight ${
-								scrolled ? "text-primary-700" : "text-white"
+								scrolled || !isHomePage
+									? "text-primary-700"
+									: "text-white"
 							}`}
 						>
 							{title}
 						</span>
 						<span
 							className={`block text-xs uppercase tracking-wider ${
-								scrolled ? "text-primary-600" : "text-white"
+								scrolled || !isHomePage
+									? "text-primary-600"
+									: "text-white"
 							}`}
 						>
 							{subtitle}
@@ -82,10 +87,10 @@ export default function Header({ data }: IHeaderProps) {
 							href={item.path}
 							className={`nav-link ${
 								pathname === item.path
-									? scrolled
+									? scrolled || !isHomePage
 										? "text-primary-700 font-semibold"
 										: "text-white font-semibold"
-									: scrolled
+									: scrolled || !isHomePage
 									? "text-neutral-600"
 									: "text-white"
 							}`}
@@ -95,18 +100,13 @@ export default function Header({ data }: IHeaderProps) {
 					))}
 				</nav>
 
-				<div className="hidden md:flex items-center space-x-4">
-					{/* <Link href={contactPath} className="btn btn-primary">
-						<FaRegEnvelopeOpen className="mr-2" />
-						{contactLabel}
-					</Link> */}
-				</div>
+				<div className="hidden md:flex items-center space-x-4"></div>
 
 				{/* Mobile Navigation Toggle */}
 				<button
 					onClick={() => setIsOpen(!isOpen)}
 					className={`md:hidden transition-colors ${
-						scrolled ? "text-neutral-700" : "text-white"
+						scrolled || !isHomePage ? "text-neutral-700" : "text-white"
 					}`}
 				>
 					{isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
