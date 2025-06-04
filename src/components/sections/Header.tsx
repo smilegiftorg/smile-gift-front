@@ -11,7 +11,7 @@ function Header(props: IHeaderSection) {
 			<div className="absolute inset-0 overflow-hidden">
 				<Image
 					src={getStrapiMedia(
-						backgroundImage?.data?.attributes?.formats?.medium?.url ||
+						backgroundImage?.data?.attributes?.url ||
 							"https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg"
 					)}
 					alt={backgroundImage?.data?.attributes?.alternativeText || title}

@@ -11,10 +11,10 @@ function VolunteerDetail() {
 	const params = useParams();
 	const { slug } = params || {};
 	const { data } = useQueryVolunteer({ slug: String(slug) });
-	console.log(data?.data);
 	if (!data?.data) {
 		return null;
 	}
+	const { registerButton } = data?.data?.attributes || {};
 	return (
 		<div className="pt-24">
 			<Hero data={data?.data} />
@@ -30,9 +30,18 @@ function VolunteerDetail() {
 							<p className="text-lg mb-6">
 								Đăng ký ngay để trở thành một phần của chương trình!
 							</p>
-							<Button variant="primary" size="lg">
+							{/* <Button variant="primary" size="lg">
 								<Link href="/volunteer/register">Đăng ký tham gia</Link>
-							</Button>
+							</Button> */}
+							<Link href={registerButton?.link} target="__blank">
+								<Button
+									variant="secondary"
+									size="lg"
+									className="bg-gradient-to-r from-secondary-600 to-secondary-500"
+								>
+									{registerButton?.text}
+								</Button>
+							</Link>
 						</div>
 					</div>
 				</div>

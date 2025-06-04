@@ -12,6 +12,7 @@ import { useInView } from "react-intersection-observer";
 
 export default function Hero(props: IHeroSection) {
 	const { subtitle, title, description, backgroundImage, buttons } = props;
+	console.log("props: ", props);
 	const [htmlReady, setHtmlReady] = useState(false);
 
 	useEffect(() => {
@@ -53,7 +54,7 @@ export default function Hero(props: IHeroSection) {
 			>
 				<Image
 					src={getStrapiMedia(
-						backgroundImage?.data?.attributes?.formats?.medium?.url ||
+						backgroundImage?.data?.attributes?.url ||
 							"https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg"
 					)}
 					alt={backgroundImage?.data?.attributes?.alternativeText || title}

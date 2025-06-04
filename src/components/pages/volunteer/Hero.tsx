@@ -18,6 +18,7 @@ interface IHeroProps {
 function Hero(props: IHeroProps) {
 	const { data } = props || {};
 	const volunteer = data?.attributes;
+	const { registerButton } = volunteer || {};
 	return (
 		<div className="relative bg-primary-800 text-white py-16">
 			<div className="absolute inset-0 overflow-hidden">
@@ -33,7 +34,7 @@ function Hero(props: IHeroProps) {
 			</div>
 			<div className="container-custom relative z-10">
 				<Link
-					href="/volunteer"
+					href="/tinh-nguyen"
 					className="inline-flex items-center text-white/90 hover:text-white mb-8 transition-colors"
 				>
 					<FaArrowLeft className="mr-2" />
@@ -70,14 +71,15 @@ function Hero(props: IHeroProps) {
 					</div>
 
 					<p className="text-xl mb-8 text-white/90">{volunteer.description}</p>
-
-					<Button
-						variant="secondary"
-						size="lg"
-						className="bg-gradient-to-r from-secondary-600 to-secondary-500"
-					>
-						<Link href="/volunteer/register">Đăng ký ngay</Link>
-					</Button>
+					<Link href={registerButton?.link} target="__blank">
+						<Button
+							variant="secondary"
+							size="lg"
+							className="bg-gradient-to-r from-secondary-600 to-secondary-500"
+						>
+							{registerButton?.text}
+						</Button>
+					</Link>
 				</div>
 			</div>
 		</div>

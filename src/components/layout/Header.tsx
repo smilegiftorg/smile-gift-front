@@ -58,22 +58,10 @@ export default function Header({ data }: IHeaderProps) {
 						</div>
 					</div>
 					<div>
-						<span
-							className={`block text-xl font-bold leading-tight ${
-								scrolled || !isHomePage
-									? "text-primary-700"
-									: "text-white"
-							}`}
-						>
+						<span className="block text-xl font-bold text-primary-700 leading-tight">
 							{title}
 						</span>
-						<span
-							className={`block text-xs uppercase tracking-wider ${
-								scrolled || !isHomePage
-									? "text-primary-600"
-									: "text-white"
-							}`}
-						>
+						<span className="block text-xs text-primary-600 uppercase tracking-wider">
 							{subtitle}
 						</span>
 					</div>
