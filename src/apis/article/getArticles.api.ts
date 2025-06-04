@@ -60,3 +60,18 @@ export const useQueryArticles = ({
 		staleTime: 0,
 	});
 };
+
+export const fetchLatestArticles = async (): Promise<
+	IDataResponse<IArticle[]>
+> => {
+	const urlParamsObject: any = {
+		populate: "*",
+		sort: ["publishedAt:desc"],
+		pagination: { limit: 10 },
+	};
+
+	const result = await fetchAPI("api/articles", urlParamsObject, {
+		next: { revalidate: 60 },
+	});
+	return result;
+};

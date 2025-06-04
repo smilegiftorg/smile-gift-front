@@ -1,4 +1,7 @@
-import { getArticlesQueryOptions } from "@/apis/article/getArticles.api";
+import {
+	fetchLatestArticles,
+	getArticlesQueryOptions,
+} from "@/apis/article/getArticles.api";
 import { getCategoriesQueryOptions } from "@/apis/category/getCategories.api";
 import { getPage } from "@/apis/page/getPage.api";
 import AllArticles from "@/components/pages/articles/AllArticles";
@@ -83,7 +86,19 @@ export async function generateMetadata() {
 	};
 }
 
-export default async function ProgramsPage() {
+export async function generateStaticParams() {
+	try {
+		const result = await fetchLatestArticles();
+		return result.data.map((article) => ({
+			slug: article.attributes.slug,
+		}));
+	} catch (error) {
+		console.error("Failed to generate static slugs:", error);
+		return [];
+	}
+}
+
+export default async function NewsPage() {
 	const page = await getPage("news", {
 		populate: {
 			backgroundImage: true,
