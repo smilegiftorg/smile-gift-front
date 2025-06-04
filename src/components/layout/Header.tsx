@@ -44,7 +44,7 @@ export default function Header({ data }: IHeaderProps) {
 			<div className="container-custom flex justify-between items-center">
 				<Link href="/" className="flex items-center space-x-2">
 					<div className="relative w-12 h-12">
-						<div className="absolute inset-0 flex items-center justify-center text-white">
+						<div className="absolute inset-0 flex items-center justify-center">
 							<Image
 								src={getStrapiMedia(
 									logo?.data?.attributes?.formats?.thumbnail?.url
@@ -52,14 +52,23 @@ export default function Header({ data }: IHeaderProps) {
 								alt="logo"
 								width={48}
 								height={48}
+								className={scrolled ? "" : "brightness-0 invert"}
 							/>
 						</div>
 					</div>
 					<div>
-						<span className="block text-xl font-bold text-primary-700 leading-tight">
+						<span
+							className={`block text-xl font-bold leading-tight ${
+								scrolled ? "text-primary-700" : "text-white"
+							}`}
+						>
 							{title}
 						</span>
-						<span className="block text-xs text-primary-600 uppercase tracking-wider">
+						<span
+							className={`block text-xs uppercase tracking-wider ${
+								scrolled ? "text-primary-600" : "text-white"
+							}`}
+						>
 							{subtitle}
 						</span>
 					</div>
@@ -73,8 +82,12 @@ export default function Header({ data }: IHeaderProps) {
 							href={item.path}
 							className={`nav-link ${
 								pathname === item.path
-									? "text-primary-700 font-semibold"
-									: "text-neutral-600"
+									? scrolled
+										? "text-primary-700 font-semibold"
+										: "text-white font-semibold"
+									: scrolled
+									? "text-neutral-600"
+									: "text-white"
 							}`}
 						>
 							{language === "vi" ? item.name : item.nameEn}
@@ -92,7 +105,9 @@ export default function Header({ data }: IHeaderProps) {
 				{/* Mobile Navigation Toggle */}
 				<button
 					onClick={() => setIsOpen(!isOpen)}
-					className="md:hidden text-neutral-700 hover:text-primary-700 transition-colors"
+					className={`md:hidden transition-colors ${
+						scrolled ? "text-neutral-700" : "text-white"
+					}`}
 				>
 					{isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
 				</button>
@@ -123,16 +138,6 @@ export default function Header({ data }: IHeaderProps) {
 										{language === "vi" ? item.name : item.nameEn}
 									</Link>
 								))}
-
-								{/* <div className="flex flex-col space-y-3 pt-3 border-t border-neutral-100">
-									<Link
-										href="/contact"
-										className="py-2 px-4 bg-primary-700 text-white rounded-lg flex items-center"
-									>
-										<FaRegEnvelopeOpen className="mr-2" />
-										{language === "vi" ? "Liên hệ" : "Contact"}
-									</Link>
-								</div> */}
 							</nav>
 						</div>
 					</motion.div>
