@@ -27,7 +27,6 @@ function AllPrograms() {
 	return (
 		<section className="py-16">
 			<div className="container-custom">
-				<CardSkeletons />
 				{isFetching && <CardSkeletons />}
 				{!isFetching && articlesData?.length > 0 && (
 					<>
