@@ -1,4 +1,4 @@
-import { ICategory, IImageData, ISeo } from "./ICommon";
+import { IButton, ICategory, IImageData, ISeo } from "./ICommon";
 
 export interface IVolunteer {
 	id: number;
@@ -17,5 +17,6 @@ export interface IVolunteer {
 		content: string;
 		seo: ISeo;
 		postions: number;
+		registerButton: IButton;
 	};
 }

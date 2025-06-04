@@ -34,7 +34,7 @@ function VolunteerCard({ volunteer }: { volunteer: IVolunteer }) {
 				<h3 className="text-xl font-bold mb-3">{title}</h3>
 
 				<p className="text-neutral-600 mb-4 flex-grow">{description}</p>
-				<Link href={`/volunteer/${slug}`}>
+				<Link href={`/tinh-nguyen/${slug}`}>
 					<Button
 						fullWidth
 						variant="primary"

@@ -54,7 +54,7 @@ export default async function VolunteerDetailPage({ params }: IPageProps) {
 				<NoData
 					title="Không tìm thấy tin tuyển TNV"
 					subtitle="Tin tuyển TNV này không tồn tại hoặc đã hết hạn."
-					buttonLink="/volunteer"
+					buttonLink="/tinh-nguyen"
 				/>
 			);
 		}

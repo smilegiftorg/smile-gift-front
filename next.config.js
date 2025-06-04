@@ -39,6 +39,10 @@ const nextConfig = {
 				destination: "/volunteer",
 			},
 			{
+				source: "/tinh-nguyen/:slug",
+				destination: "/volunteer/:slug",
+			},
+			{
 				source: "/quyen-gop",
 				destination: "/donate",
 			},
