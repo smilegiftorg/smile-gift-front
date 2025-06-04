@@ -32,7 +32,6 @@ export default function Header({ data }: IHeaderProps) {
 	}, []);
 
 	useEffect(() => {
-		// Close mobile menu when route changes
 		setIsOpen(false);
 	}, [pathname]);
 
