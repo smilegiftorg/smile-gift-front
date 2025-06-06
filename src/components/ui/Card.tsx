@@ -1,42 +1,75 @@
-'use client';
+import React from 'react';
+import {
+  View,
+  StyleSheet,
+  ViewStyle,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from 'react-native';
+import { Colors } from '../../constants/colors';
+import { Spacing } from '../../constants/spacing';
 
-import { ReactNode } from 'react';
-import { motion } from 'framer-motion';
-import classNames from 'classnames';
-
-interface CardProps {
-  children: ReactNode;
-  className?: string;
+interface CardProps extends TouchableOpacityProps {
+  children: React.ReactNode;
+  style?: ViewStyle;
   variant?: 'default' | 'outlined' | 'elevated';
-  hoverEffect?: boolean;
-  onClick?: () => void;
+  onPress?: () => void;
 }
 
-export default function Card({
+export const Card: React.FC<CardProps> = ({
   children,
-  className,
+  style,
   variant = 'default',
-  hoverEffect = true,
-  onClick,
-}: CardProps) {
-  const cardClasses = classNames(
-    'rounded-lg overflow-hidden transition-all duration-300',
-    {
-      'bg-white shadow-md': variant === 'default',
-      'border border-neutral-200 bg-white': variant === 'outlined',
-      'bg-white shadow-lg': variant === 'elevated',
-      'hover:shadow-lg cursor-pointer': hoverEffect && onClick,
+  onPress,
+  ...props
+}) => {
+  const cardStyle = [styles.card, styles[variant], style];
+
+  if (onPress) {
+    return (
+      <TouchableOpacity
+        style={cardStyle}
+        onPress={onPress}
+        activeOpacity={0.8}
+        {...props}>
+        {children}
+      </TouchableOpacity>
+    );
+  }
+
+  return <View style={cardStyle}>{children}</View>;
+};
+
+const styles = StyleSheet.create({
+  card: {
+    borderRadius: 12,
+    padding: Spacing.md,
+  },
+  default: {
+    backgroundColor: Colors.white,
+    shadowColor: Colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
     },
-    className
-  );
-  
-  return (
-    <motion.div
-      className={cardClasses}
-      whileHover={hoverEffect ? { y: -5 } : {}}
-      onClick={onClick}
-    >
-      {children}
-    </motion.div>
-  );
-}
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  outlined: {
+    backgroundColor: Colors.white,
+    borderWidth: 1,
+    borderColor: Colors.neutral[200],
+  },
+  elevated: {
+    backgroundColor: Colors.white,
+    shadowColor: Colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+});

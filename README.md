@@ -1,70 +1,116 @@
-# Smile Gift Charity
+# Smile Gift Charity Mobile App
 
-Smile Gift Charity is a modern web application built with [Next.js](https://nextjs.org/), designed to support charitable initiatives through a responsive, user-friendly interface. The project leverages a robust tech stack to deliver a seamless experience, including features like internationalization, animations, and optimized performance.
+Ứng dụng di động cho CLB Thiện Nguyện Smile Gift được xây dựng bằng React Native.
 
----
+## Tính năng chính
 
-## Table of Contents
+- **Trang chủ**: Hiển thị thông tin tổng quan, thống kê tác động và các chương trình nổi bật
+- **Chương trình**: Danh sách các chương trình thiện nguyện với bộ lọc và tìm kiếm
+- **Tin tức**: Cập nhật tin tức và chia sẻ từ CLB
+- **Tình nguyện**: Tuyển dụng tình nguyện viên cho các hoạt động
+- **Cá nhân**: Quản lý thông tin cá nhân và lịch sử tham gia
 
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Running the Application](#running-the-application)
-- [Scripts](#scripts)
-- [Dependencies](#dependencies)
-- [Contributing](#contributing)
-- [License](#license)
+## Thiết kế UI/UX
 
----
+Ứng dụng sử dụng hệ thống màu sắc và typography nhất quán:
 
-## Features
+### Màu sắc chính
+- **Primary**: Xanh lá cây (#194923 - #3D8046)
+- **Secondary**: Vàng cam (#F5A623)
+- **Accent**: Đỏ (#E63946)
+- **Neutral**: Xám (#F5F5F5 - #000000)
 
-- **Responsive Design**: Optimized for all devices using `react-responsive`.
-- **Internationalization**: Multi-language support powered by `next-intl`.
-- **Animations**: Smooth transitions and effects with `framer-motion`.
-- **Performance Optimization**: Includes `nextjs-toploader` for loading indicators and `@tanstack/react-query` for efficient data fetching.
-- **Interactive UI**: Features carousels with `react-id-swiper` and icons from `lucide-react`.
-- **Form Handling**: Simplified form management using `react-hook-form`.
-- **SEO and Accessibility**: Enhanced with Next.js features and Tailwind CSS utilities.
+### Typography
+- **Font sizes**: 12px - 48px
+- **Font weights**: Normal, Medium, Semibold, Bold
+- **Line heights**: Tight (1.2), Normal (1.5), Relaxed (1.75)
 
----
+### Spacing
+- **System**: 4px, 8px, 16px, 24px, 32px, 48px, 64px
 
-## Tech Stack
+## Cài đặt và chạy
 
-- **Framework**: [Next.js](https://nextjs.org/) (v14.1.0)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) with PostCSS and Autoprefixer
-- **State Management**: [TanStack React Query](https://tanstack.com/query)
-- **UI Components**: [Lucide React](https://lucide.dev/), [React Icons](https://react-icons.github.io/react-icons/), [Swiper](https://swiperjs.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **Utilities**: [Day.js](https://day.js.org/), [Lodash Debounce](https://lodash.com/), [QS](https://github.com/ljharb/qs), [Sonner](https://sonner.dev/) (toasts)
-- **Linting**: [ESLint](https://eslint.org/) with Next.js configuration
+### Yêu cầu
+- Node.js >= 18
+- React Native CLI
+- Android Studio (cho Android)
+- Xcode (cho iOS)
 
----
+### Cài đặt dependencies
+```bash
+npm install
+# hoặc
+yarn install
+```
 
-## Getting Started
+### Chạy trên Android
+```bash
+npm run android
+# hoặc
+yarn android
+```
 
-Follow these steps to set up and run the project locally.
+### Chạy trên iOS
+```bash
+npm run ios
+# hoặc
+yarn ios
+```
 
-### Prerequisites
+## Cấu trúc thư mục
 
-Ensure you have the following installed:
+```
+src/
+├── components/          # Các component tái sử dụng
+│   ├── ui/             # UI components cơ bản
+│   ├── ProgramCard.tsx # Card hiển thị chương trình
+│   └── ArticleCard.tsx # Card hiển thị bài viết
+├── constants/          # Hằng số và cấu hình
+│   ├── colors.ts       # Hệ thống màu sắc
+│   ├── typography.ts   # Typography system
+│   └── spacing.ts      # Spacing system
+├── navigation/         # Navigation setup
+├── screens/           # Các màn hình chính
+│   ├── HomeScreen.tsx
+│   ├── ProgramsScreen.tsx
+│   ├── NewsScreen.tsx
+│   ├── VolunteerScreen.tsx
+│   └── ProfileScreen.tsx
+└── types/             # TypeScript types
+```
 
-- [Node.js](https://nodejs.org/) (v18 or higher recommended)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) (yarn is used in this project)
-- A modern web browser
+## Thư viện sử dụng
 
-### Installation
+- **@react-navigation**: Navigation
+- **@tanstack/react-query**: Data fetching và caching
+- **react-native-fast-image**: Tối ưu hiển thị hình ảnh
+- **react-native-linear-gradient**: Gradient backgrounds
+- **react-native-vector-icons**: Icons
+- **react-native-reanimated**: Animations
 
-1. Clone the repository:
+## Tính năng nâng cao
 
-   ```bash
-   git clone https://github.com/your-username/smile-gift-charity.git
-   cd smile-gift-charity
-   ```
+- **Responsive Design**: Tối ưu cho mọi kích thước màn hình
+- **Performance**: Sử dụng FlatList và lazy loading
+- **Offline Support**: Caching dữ liệu với React Query
+- **Accessibility**: Hỗ trợ screen readers
+- **Dark Mode**: Sẵn sàng cho chế độ tối (có thể mở rộng)
 
-2. Open your browser and navigate to:
+## Đóng góp
 
-   http://localhost:3000
+1. Fork repository
+2. Tạo feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Tạo Pull Request
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Liên hệ
+
+CLB Thiện Nguyện Smile Gift
+- Email: smilegift.vn@gmail.com
+- Facebook: facebook.com/smilegift.sg
+- Phone: 0355.749.581
