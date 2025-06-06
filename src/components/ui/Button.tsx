@@ -128,3 +128,5 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
 });
+
+export default Button
