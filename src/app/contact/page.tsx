@@ -272,27 +272,6 @@ export default function ContactPage() {
 					</motion.div>
 				</div>
 			</section>
-
-			{/* Map Section */}
-			<section className="py-16 bg-neutral-50">
-				<div className="container-custom">
-					<h2 className="text-3xl font-bold mb-10 text-center">Khu vực hoạt động</h2>
-
-					<div className="bg-white p-4 rounded-lg shadow-md">
-						<div className="aspect-[16/9] bg-neutral-200 relative">
-							<div className="absolute inset-0 flex items-center justify-center text-neutral-500">
-								[Bản đồ khu vực hoạt động]
-							</div>
-						</div>
-					</div>
-
-					<div className="mt-8 text-center">
-						<p className="text-lg">
-							CLB Thiện Nguyện Smile Gift chủ yếu hoạt động tại TP.HCM, An Giang và các tỉnh miền Tây Nam Bộ.
-						</p>
-					</div>
-				</div>
-			</section>
 		</div>
 	);
 }
