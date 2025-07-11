@@ -26,22 +26,15 @@ function RegisterForm() {
 	} = useForm<RegistrationFormData>();
 
 	const onSubmit = (data: RegistrationFormData) => {
-		console.log(data);
 		setIsSubmitted(true);
 	};
 
 	return (
 		<div className="max-w-2xl mx-auto">
 			{!isSubmitted ? (
-				<form
-					onSubmit={handleSubmit(onSubmit)}
-					className="bg-white p-8 rounded-lg shadow-md"
-				>
+				<form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow-md">
 					<div className="mb-6">
-						<label
-							htmlFor="fullName"
-							className="block text-sm font-medium text-neutral-700 mb-1"
-						>
+						<label htmlFor="fullName" className="block text-sm font-medium text-neutral-700 mb-1">
 							Họ và tên <span className="text-accent-500">*</span>
 						</label>
 						<input
@@ -52,18 +45,11 @@ function RegisterForm() {
 							} rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500`}
 							{...register("fullName", { required: true })}
 						/>
-						{errors.fullName && (
-							<span className="text-sm text-accent-500 mt-1">
-								Vui lòng nhập họ tên của bạn
-							</span>
-						)}
+						{errors.fullName && <span className="text-sm text-accent-500 mt-1">Vui lòng nhập họ tên của bạn</span>}
 					</div>
 
 					<div className="mb-6">
-						<label
-							htmlFor="email"
-							className="block text-sm font-medium text-neutral-700 mb-1"
-						>
+						<label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-1">
 							Email <span className="text-accent-500">*</span>
 						</label>
 						<input
@@ -77,18 +63,11 @@ function RegisterForm() {
 								pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
 							})}
 						/>
-						{errors.email && (
-							<span className="text-sm text-accent-500 mt-1">
-								Vui lòng nhập email hợp lệ
-							</span>
-						)}
+						{errors.email && <span className="text-sm text-accent-500 mt-1">Vui lòng nhập email hợp lệ</span>}
 					</div>
 
 					<div className="mb-6">
-						<label
-							htmlFor="phone"
-							className="block text-sm font-medium text-neutral-700 mb-1"
-						>
+						<label htmlFor="phone" className="block text-sm font-medium text-neutral-700 mb-1">
 							Số điện thoại <span className="text-accent-500">*</span>
 						</label>
 						<input
@@ -99,18 +78,11 @@ function RegisterForm() {
 							} rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500`}
 							{...register("phone", { required: true })}
 						/>
-						{errors.phone && (
-							<span className="text-sm text-accent-500 mt-1">
-								Vui lòng nhập số điện thoại
-							</span>
-						)}
+						{errors.phone && <span className="text-sm text-accent-500 mt-1">Vui lòng nhập số điện thoại</span>}
 					</div>
 
 					<div className="mb-6">
-						<label
-							htmlFor="address"
-							className="block text-sm font-medium text-neutral-700 mb-1"
-						>
+						<label htmlFor="address" className="block text-sm font-medium text-neutral-700 mb-1">
 							Địa chỉ
 						</label>
 						<input
@@ -122,10 +94,7 @@ function RegisterForm() {
 					</div>
 
 					<div className="mb-6">
-						<label
-							htmlFor="message"
-							className="block text-sm font-medium text-neutral-700 mb-1"
-						>
+						<label htmlFor="message" className="block text-sm font-medium text-neutral-700 mb-1">
 							Lời nhắn
 						</label>
 						<textarea
@@ -143,9 +112,7 @@ function RegisterForm() {
 									id="agreeTerms"
 									type="checkbox"
 									className={`h-4 w-4 text-primary-600 border ${
-										errors.agreeTerms
-											? "border-accent-500"
-											: "border-neutral-300"
+										errors.agreeTerms ? "border-accent-500" : "border-neutral-300"
 									} rounded focus:ring-primary-500`}
 									{...register("agreeTerms", { required: true })}
 								/>
@@ -163,9 +130,7 @@ function RegisterForm() {
 									của CLB <span className="text-accent-500">*</span>
 								</label>
 								{errors.agreeTerms && (
-									<p className="text-accent-500 mt-1">
-										Bạn cần đồng ý với điều khoản và chính sách
-									</p>
+									<p className="text-accent-500 mt-1">Bạn cần đồng ý với điều khoản và chính sách</p>
 								)}
 							</div>
 						</div>
@@ -178,18 +143,14 @@ function RegisterForm() {
 			) : (
 				<div className="bg-white p-8 rounded-lg shadow-md text-center">
 					<div className="text-5xl mb-4">🎉</div>
-					<h2 className="text-2xl font-bold mb-4">
-						Đăng ký tham gia thành công!
-					</h2>
+					<h2 className="text-2xl font-bold mb-4">Đăng ký tham gia thành công!</h2>
 					<p className="text-neutral-600 mb-6">
-						Cảm ơn bạn đã đăng ký tham gia chương trình. Chúng tôi sẽ liên hệ
-						với bạn qua email hoặc số điện thoại để xác nhận thông tin.
+						Cảm ơn bạn đã đăng ký tham gia chương trình. Chúng tôi sẽ liên hệ với bạn qua email hoặc số điện thoại để
+						xác nhận thông tin.
 					</p>
 					<div className="flex flex-col sm:flex-row gap-4 justify-center">
 						<Button variant="outline">
-							<Link href={`/programs/${slug}`}>
-								Quay lại trang chương trình
-							</Link>
+							<Link href={`/programs/${slug}`}>Quay lại trang chương trình</Link>
 						</Button>
 						<Button variant="primary">
 							<Link href="/programs">Xem các chương trình khác</Link>

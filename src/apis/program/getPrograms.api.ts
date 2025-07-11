@@ -10,9 +10,7 @@ type UseProgramsOptions = {
 	queryConfig?: QueryConfig<typeof getProgramsQueryOptions>;
 };
 
-export const fetchPrograms = async (
-	searchParams?: any
-): Promise<IDataResponse<IProgram[]>> => {
+export const fetchPrograms = async (searchParams?: any): Promise<IDataResponse<IProgram[]>> => {
 	const { status, category, page, search } = searchParams || {};
 	const urlParamsObject: any = {
 		populate: "*",
@@ -20,9 +18,7 @@ export const fetchPrograms = async (
 			pageSize: itemsPerPageDefault,
 			page,
 		},
-		sort: {
-			priority: "asc",
-		},
+		sort: ["publishedAt:desc"],
 	};
 	if (status) {
 		urlParamsObject.filters = {
@@ -58,10 +54,7 @@ export const getProgramsQueryOptions = (searchParams?: any) => {
 	});
 };
 
-export const useQueryPrograms = ({
-	queryConfig,
-	searchParams,
-}: UseProgramsOptions) => {
+export const useQueryPrograms = ({ queryConfig, searchParams }: UseProgramsOptions) => {
 	return useQuery({
 		...getProgramsQueryOptions(searchParams),
 		...queryConfig,

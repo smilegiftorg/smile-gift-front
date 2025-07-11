@@ -17,9 +17,7 @@ export default function RegistrationForm({ programId }: RegistrationFormProps) {
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
-	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = e.target;
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
@@ -40,8 +38,6 @@ export default function RegistrationForm({ programId }: RegistrationFormProps) {
 
 		// Simulate API call
 		setTimeout(() => {
-			console.log("Form submitted for program ID:", programId, formData);
-
 			toast.success("Đăng ký tham gia thành công!", {
 				description: "Chúng tôi sẽ liên hệ với bạn qua email hoặc điện thoại.",
 			});

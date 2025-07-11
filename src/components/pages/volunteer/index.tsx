@@ -27,18 +27,12 @@ function VolunteerDetail() {
 						</article>
 						<div className="bg-primary-50 p-8 rounded-lg text-center mt-8">
 							<h3 className="text-2xl font-bold mb-4">Sẵn sàng tham gia?</h3>
-							<p className="text-lg mb-6">
-								Đăng ký ngay để trở thành một phần của chương trình!
-							</p>
+							<p className="text-lg mb-6">Đăng ký ngay để trở thành một phần của chương trình!</p>
 							{/* <Button variant="primary" size="lg">
 								<Link href="/volunteer/register">Đăng ký tham gia</Link>
 							</Button> */}
 							<Link href={registerButton?.link} target="__blank">
-								<Button
-									variant="secondary"
-									size="lg"
-									className="bg-gradient-to-r from-secondary-600 to-secondary-500"
-								>
+								<Button variant="secondary" size="lg" className="bg-gradient-to-r from-secondary-600 to-secondary-500">
 									{registerButton?.text}
 								</Button>
 							</Link>

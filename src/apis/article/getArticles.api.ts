@@ -10,9 +10,7 @@ type UseArticlesOptions = {
 	queryConfig?: QueryConfig<typeof getArticlesQueryOptions>;
 };
 
-export const fetchArticles = async (
-	searchParams?: any
-): Promise<IDataResponse<IArticle[]>> => {
+export const fetchArticles = async (searchParams?: any): Promise<IDataResponse<IArticle[]>> => {
 	const { category, page, search } = searchParams || {};
 	const urlParamsObject: any = {
 		populate: "*",
@@ -20,6 +18,7 @@ export const fetchArticles = async (
 			pageSize: itemsPerPageDefault,
 			page,
 		},
+		sort: ["publishedAt:desc"],
 	};
 
 	if (search) {
@@ -50,10 +49,7 @@ export const getArticlesQueryOptions = (searchParams?: any) => {
 	});
 };
 
-export const useQueryArticles = ({
-	queryConfig,
-	searchParams,
-}: UseArticlesOptions) => {
+export const useQueryArticles = ({ queryConfig, searchParams }: UseArticlesOptions) => {
 	return useQuery({
 		...getArticlesQueryOptions(searchParams),
 		...queryConfig,
@@ -61,9 +57,7 @@ export const useQueryArticles = ({
 	});
 };
 
-export const fetchLatestArticles = async (): Promise<
-	IDataResponse<IArticle[]>
-> => {
+export const fetchLatestArticles = async (): Promise<IDataResponse<IArticle[]>> => {
 	const urlParamsObject: any = {
 		populate: "*",
 		sort: ["publishedAt:desc"],

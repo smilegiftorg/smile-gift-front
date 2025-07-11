@@ -10,9 +10,7 @@ type UseVolunteersOptions = {
 	queryConfig?: QueryConfig<typeof getVolunteerQueryOptions>;
 };
 
-export const fetchVolunteers = async (
-	searchParams?: any
-): Promise<IDataResponse<IVolunteer[]>> => {
+export const fetchVolunteers = async (searchParams?: any): Promise<IDataResponse<IVolunteer[]>> => {
 	const { category, page, search } = searchParams || {};
 	const urlParamsObject: any = {
 		populate: "*",
@@ -20,6 +18,7 @@ export const fetchVolunteers = async (
 			pageSize: itemsPerPageDefault,
 			page,
 		},
+		sort: ["publishedAt:desc"],
 	};
 
 	if (search) {
@@ -50,10 +49,7 @@ export const getVolunteerQueryOptions = (searchParams?: any) => {
 	});
 };
 
-export const useQueryVolunteers = ({
-	queryConfig,
-	searchParams,
-}: UseVolunteersOptions) => {
+export const useQueryVolunteers = ({ queryConfig, searchParams }: UseVolunteersOptions) => {
 	return useQuery({
 		...getVolunteerQueryOptions(searchParams),
 		...queryConfig,

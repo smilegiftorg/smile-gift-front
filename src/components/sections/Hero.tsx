@@ -12,7 +12,6 @@ import { useInView } from "react-intersection-observer";
 
 export default function Hero(props: IHeroSection) {
 	const { subtitle, title, description, backgroundImage, buttons } = props;
-	console.log("props: ", props);
 	const [htmlReady, setHtmlReady] = useState(false);
 
 	useEffect(() => {
@@ -117,12 +116,7 @@ export default function Hero(props: IHeroSection) {
 									whileTap={{ scale: 0.95 }}
 									transition={{ duration: 0.2 }}
 								>
-									<Button
-										variant={variant}
-										size="lg"
-										leftIcon={<Icon />}
-										className={classes}
-									>
+									<Button variant={variant} size="lg" leftIcon={<Icon />} className={classes}>
 										<Link href={link}>{text}</Link>
 									</Button>
 								</motion.div>
@@ -138,11 +132,7 @@ export default function Hero(props: IHeroSection) {
 				transition={{ duration: 0.8, delay: 1 }}
 				className="absolute bottom-0 left-0 right-0"
 			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 1440 100"
-					className="w-full"
-				>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" className="w-full">
 					<path
 						fill="#FFFFFF"
 						fillOpacity="1"
